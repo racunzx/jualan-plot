@@ -49,8 +49,12 @@ else:
     for i, txt in enumerate(sale):
         ax.text(i, txt + 5, str(txt), ha='center', fontsize=8)
 
-    # Menambah jumlah jualan dan purata di bawah graf
-    fig.text(0.1, 0.01, f"Total Jualan: RM {jumlah_sale:.2f} | Purata Harian: RM {jumlah_sale/len(sale):.2f}", fontsize=12, color='red')
+    # Menambah jumlah jualan di bawah graf
+    fig.text(0.1, 0.01, f"Total Jualan: RM {jumlah_sale:.2f}", fontsize=12, color='red')
 
+    # Simpan graf sebagai fail
     plt.tight_layout()
-    plt.savefig("graf_jualan.png")
+    plt.savefig("graf_jualan.png")  # <- baris ini penting untuk GitHub Actions
+
+    # Papar graf (optional)
+    plt.show()
