@@ -1,12 +1,13 @@
-name: Jalankan Skrip Jualan
+name: Jalankan dan Commit Jualan Grafik
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:  # Untuk jalankan manual dari GitHub
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
-  contents: write  # ✅ Ini membenarkan push ke repo
+  contents: write
 
 jobs:
   run-script:
@@ -14,23 +15,24 @@ jobs:
 
     steps:
     - name: Checkout kod
-      uses: actions/checkout@v2  # ✅ Gunakan v2 untuk push dengan token GitHub Actions
+      uses: actions/checkout@v2
 
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
         python-version: '3.10'
 
-    - name: Pasang keperluan
+    - name: Pasang matplotlib
       run: pip install matplotlib
 
-    - name: Jalankan skrip Python
+    - name: Jalankan skrip jualan_harian.py
       run: python jualan_harian.py
 
-    - name: Commit hasil graf
+    - name: Commit & push graf_jualan.png setiap run
       run: |
         git config user.name "github-actions"
-        git config user.email "github-actions@github.com"
+        git config user.email "actions@users.noreply.github.com"
         git add graf_jualan.png
-        git diff --quiet && echo "Tiada perubahan untuk commit" || git commit -m "Add auto-generated sales graph"
-        git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git
+        timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        git commit -m "Tambah graf jualan terkini - ${timestamp}" || echo "Tiada perubahan untuk commit"
+        git push
