@@ -21,24 +21,17 @@ sale = [
     242, 319, 269, 295, 348
 ]
 
-# Check if the lengths match
 if len(hari) != len(tarikh) or len(tarikh) != len(sale):
     print("Error: The lengths of 'hari', 'tarikh', and 'sale' do not match.")
 else:
-    # Gabungkan nama hari dan tarikh untuk label paksi-x
     label_x = [f"{h} ({d})" for h, d in zip(hari, tarikh)]
-
-    # Kira jumlah jualan
     jumlah_sale = sum(sale)
+    purata_sale = jumlah_sale / len(sale)
 
-    # Buat figure dengan 1 subplot
     fig, ax = plt.subplots(figsize=(14, 7))
     x_indexes = np.arange(len(hari))
-
-    # Warna untuk bar chart
     color_sale = '#28B463'
 
-    # Subplot: Jualan
     ax.bar(x_indexes, sale, color=color_sale)
     ax.set_xlabel("Hari dan Tarikh")
     ax.set_ylabel("Jualan (RM)")
@@ -46,15 +39,19 @@ else:
     ax.grid(axis='y', linestyle='--', alpha=0.7)
     ax.set_xticks(x_indexes)
     ax.set_xticklabels(label_x, rotation=45, ha="right")
+
+    # Tulis nilai jualan atas bar
     for i, txt in enumerate(sale):
         ax.text(i, txt + 5, str(txt), ha='center', fontsize=8)
 
-    # Menambah jumlah jualan di bawah graf
+    # Plot garisan purata jualan
+    ax.axhline(y=purata_sale, color='red', linestyle='--', linewidth=2)
+    ax.text(len(hari)-1, purata_sale + 5, f'Purata: RM {purata_sale:.2f}', color='red', fontsize=10, ha='right')
+
+    # Jumlah jualan bawah graf
     fig.text(0.1, 0.01, f"Total Jualan: RM {jumlah_sale:.2f}", fontsize=12, color='red')
 
-    # Simpan graf sebagai fail
+    # Simpan graf sebagai PNG
     plt.tight_layout()
-    plt.savefig("graf_jualan.png")  # <- baris ini penting untuk GitHub Actions
-
-    # Papar graf (optional)
+    plt.savefig('graf_jualan.png')
     plt.show()
