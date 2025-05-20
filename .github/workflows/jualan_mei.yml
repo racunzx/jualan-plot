@@ -28,7 +28,7 @@ jobs:
     - name: Jalankan skrip jualan_mei.py
       run: python jualan_mei.py
 
-    - name: Commit & push graf_jualan.png setiap run
+    - name: Commit & push graf_jualan_mei.png setiap run
       run: |
         git config user.name "github-actions"
         git config user.email "actions@users.noreply.github.com"
