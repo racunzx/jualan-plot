@@ -25,8 +25,8 @@ jobs:
 
     - name: Commit hasil graf
       run: |
-        git config user.name "github-actions"
-        git config user.email "github-actions@github.com"
-        git add graf_jualan.png
-        git diff --quiet && echo "Tiada perubahan untuk commit" || git commit -m "Add auto-generated sales graph"
-        git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git
+       git config user.name "github-actions"
+       git config user.email "github-actions@github.com"
+       git add graf_jualan.png
+       git diff --quiet && echo "Tiada perubahan untuk commit" || git commit -m "Add auto-generated sales graph"
+       git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git
