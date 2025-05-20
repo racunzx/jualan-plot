@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import datetime
 
-# Data jualan dan QR
+# Data jualan dan QR MEI 2025
 sales_data = [
     ("1.5.2025", 350),
     ("2.5.2025", 265),
@@ -66,5 +66,5 @@ fig.text(0.1, 0.01, f"Total Jualan: RM {jumlah_sale:.2f}", fontsize=12, color='r
 ax.legend()
 
 plt.tight_layout()
-plt.savefig("graf_jualan.png")
+plt.savefig("graf_jualan_mei.png")
 plt.show()
