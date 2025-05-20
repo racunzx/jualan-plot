@@ -32,7 +32,7 @@ jobs:
       run: |
         git config user.name "github-actions"
         git config user.email "actions@users.noreply.github.com"
-        git add graf_jualan.png
+        git add graf_jualan_mei.png
         timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
         git commit -m "Tambah graf jualan terkini - ${timestamp}" || echo "Tiada perubahan untuk commit"
         git push
